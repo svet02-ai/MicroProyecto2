@@ -17,3 +17,6 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Node Modules
+node_modules/
