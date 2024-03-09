@@ -35,6 +35,7 @@ export default function Root() {
         useEffect(() => {
         document.getElementById("q").value = q;
         }, [q]);
+    
     const submit = useSubmit();
     const searching =
     navigation.location &&
@@ -57,7 +58,10 @@ export default function Root() {
                 name="q"
                 defaultValue={q}
                 onChange={(event) => {
-                    submit(event.currentTarget.form);
+                    const isFirstSearch = q == null;
+                        submit(event.currentTarget.form, {
+                        replace: !isFirstSearch,
+                    });
                   }}
               />
               <div
