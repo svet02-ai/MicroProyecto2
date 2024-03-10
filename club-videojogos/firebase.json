@@ -3,7 +3,7 @@
     "rules": "Cloud Firestore"
   },
   "hosting": {
-    "public": "src",
+    "public": "/",
     "ignore": [
       "firebase.json",
       "**/.*",
