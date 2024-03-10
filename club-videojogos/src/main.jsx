@@ -7,11 +7,11 @@ import {
 import './index.css'
 import Root, { loader as rootLoader, action as rootAction, } from "./routes/root";
 import ErrorPage from "./error-page";
-import Contact, {
-  loader as contactLoader,
-  action as contactAction,
-} from "./routes/contact";
-import EditContact, {
+import Group, {
+  loader as groupLoader,
+  action as groupAction,
+} from "./routes/group";
+import Editgroup, {
   action as editAction,
 } from "./routes/edit";
 import { 
@@ -32,10 +32,10 @@ const router = createBrowserRouter([
         children: [
           { index: true, element: <Index /> },
           {
-            path: "contacts/:contactId",
-            element: <Contact />,
-            loader: contactLoader,
-            action: contactAction,
+            path: "groups/:groupId",
+            element: <Group />,
+            loader: groupLoader,
+            action: groupAction,
           },
           /* the rest of the routes */
         ],
@@ -43,19 +43,19 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "contacts/:contactId",
-    element: <Contact />,
-    loader: contactLoader,
-    action: contactAction,
+    path: "groups/:groupId",
+    element: <Group />,
+    loader: groupLoader,
+    action: groupAction,
   },
   {
-    path: "contacts/:contactId/edit",
-    element: <EditContact />,
-    loader: contactLoader,
+    path: "groups/:groupId/edit",
+    element: <Editgroup />,
+    loader: groupLoader,
     action: editAction,
   },
   {
-    path: "contacts/:contactId/destroy",
+    path: "groups/:groupId/destroy",
     action: destroyAction,
     errorElement: <div>Oops! There was an error.</div>,
   },
