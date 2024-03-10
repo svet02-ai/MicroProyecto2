@@ -9,9 +9,9 @@ import {
     useSubmit,
 } from "react-router-dom";
 import { 
-    getContacts, 
-    createContact 
-} from "../contacts";
+    getgroups, 
+    creategroup 
+} from "../groups";
 import { 
     useEffect 
 } from "react";
@@ -20,17 +20,17 @@ export async function loader({ request }) {
     const url = new URL(request.url);
     const q = url.searchParams.get("q");
     
-    const contacts = await getContacts(q);
-    return { contacts, q };
+    const groups = await getgroups(q);
+    return { groups, q };
   }
 
 export async function action() {
-  const contact = await createContact();
-  return redirect(`/contacts/${contact.id}/edit`);
+  const group = await creategroup();
+  return redirect(`/groups/${group.id}/edit`);
 }
 
 export default function Root() {
-    const { contacts, q } = useLoaderData();
+    const { groups, q } = useLoaderData();
     const navigation = useNavigation();
         useEffect(() => {
         document.getElementById("q").value = q;
@@ -46,13 +46,13 @@ export default function Root() {
     return (
       <>
         <div id="sidebar">
-          <h1>React Router Contacts</h1>
+          <h1>React Router groups</h1>
           <div>
             <Form id="search-form" role="search">
               <input
                 id="q"
                 className={searching ? "loading" : ""}
-                aria-label="Search contacts"
+                aria-label="Search groups"
                 placeholder="Search"
                 type="search"
                 name="q"
@@ -79,12 +79,12 @@ export default function Root() {
             </Form>
           </div>
           <nav>
-            {contacts.length ? (
+            {groups.length ? (
                 <ul>
-                {contacts.map((contact) => (
-                    <li key={contact.id}>
+                {groups.map((group) => (
+                    <li key={group.id}>
                         <NavLink
-                        to={`contacts/${contact.id}`}
+                        to={`groups/${group.id}`}
                         className={({ isActive, isPending }) =>
                         isActive
                             ? "active"
@@ -93,15 +93,15 @@ export default function Root() {
                             : ""
                         }
                         >
-                        <Link to={`contacts/${contact.id}`}>
-                            {contact.first || contact.last ? (
+                        <Link to={`groups/${group.id}`}>
+                            {group.name ? (
                             <>
-                                {contact.first} {contact.last}
+                                {group.name} 
                             </>
                             ) : (
                             <i>No Name</i>
                             )}{" "}
-                            {contact.favorite && <span>★</span>}
+                            {group.favorite && <span>★</span>}
                         </Link>
                     </NavLink>
                     </li>
@@ -109,7 +109,7 @@ export default function Root() {
                 </ul>
             ) : (
                 <p>
-                <i>No contacts</i>
+                <i>No groups</i>
                 </p>
             )}
           </nav>

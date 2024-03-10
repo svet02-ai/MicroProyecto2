@@ -4,7 +4,7 @@ import {
     redirect,
     useNavigate,
 } from "react-router-dom";
-import { updateContact } from "../contacts";
+import { updategroup } from "../groups";
 
 export async function action({ request, params }) {
     const formData = await request.formData();
@@ -13,40 +13,33 @@ export async function action({ request, params }) {
     const updates = Object.fromEntries(formData);
     updates.first;
     updates.last;
-    await updateContact(params.contactId, updates);
-    return redirect(`/contacts/${params.contactId}`);
+    await updategroup(params.groupId, updates);
+    return redirect(`/groups/${params.groupId}`);
 }
 
-export default function EditContact() {
-  const { contact } = useLoaderData();
+export default function Editgroup() {
+  const { group } = useLoaderData();
   const navigate = useNavigate();
 
   return (
-    <Form method="post" id="contact-form">
+    <Form method="post" id="group-form">
       <p>
         <span>Name</span>
         <input
-          placeholder="First"
-          aria-label="First name"
+          placeholder="Name of the group"
+          aria-label="Name"
           type="text"
-          name="first"
-          defaultValue={contact.first}
-        />
-        <input
-          placeholder="Last"
-          aria-label="Last name"
-          type="text"
-          name="last"
-          defaultValue={contact.last}
+          name="name"
+          defaultValue={group.name}
         />
       </p>
       <label>
-        <span>Twitter</span>
+        <span>Description</span>
         <input
           type="text"
-          name="twitter"
-          placeholder="@jack"
-          defaultValue={contact.twitter}
+          name="Description"
+          placeholder="This is the description of the group"
+          defaultValue={group.description}
         />
       </label>
       <label>
@@ -56,15 +49,16 @@ export default function EditContact() {
           aria-label="Avatar URL"
           type="text"
           name="avatar"
-          defaultValue={contact.avatar}
+          defaultValue={group.avatar}
         />
       </label>
       <label>
-        <span>Notes</span>
+        <span>Games</span>
         <textarea
-          name="notes"
-          defaultValue={contact.notes}
-          rows={6}
+          placeholder=""
+          name="games"
+          defaultValue={group.games}
+          rows={1}
         />
       </label>
       <p>
