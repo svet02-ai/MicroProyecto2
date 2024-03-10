@@ -8,11 +8,9 @@ import { updategroup } from "../groups";
 
 export async function action({ request, params }) {
     const formData = await request.formData();
-    const firstName = formData.get("first");
-    const lastName = formData.get("last");
+    const name = formData.get("name");
     const updates = Object.fromEntries(formData);
-    updates.first;
-    updates.last;
+    updates.name;
     await updategroup(params.groupId, updates);
     return redirect(`/groups/${params.groupId}`);
 }
@@ -37,7 +35,7 @@ export default function Editgroup() {
         <span>Description</span>
         <input
           type="text"
-          name="Description"
+          name="description"
           placeholder="This is the description of the group"
           defaultValue={group.description}
         />

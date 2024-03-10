@@ -5,7 +5,10 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import './index.css'
-import Root, { loader as rootLoader, action as rootAction, } from "./routes/root";
+import Root, { 
+  loader as rootLoader, 
+  action as rootAction, 
+} from "./routes/root";
 import ErrorPage from "./error-page";
 import Group, {
   loader as groupLoader,
@@ -37,7 +40,6 @@ const router = createBrowserRouter([
             loader: groupLoader,
             action: groupAction,
           },
-          /* the rest of the routes */
         ],
       },
     ],

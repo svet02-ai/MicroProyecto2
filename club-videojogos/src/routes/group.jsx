@@ -49,15 +49,7 @@ export default function group() {
           <Favorite group={group} />
         </h1>
 
-        {group.description && (
-          <p>
-            <a
-              target="_blank"
-            >
-              {group.description}
-            </a>
-          </p>
-        )}
+        {group.description && <p>{group.description}</p>}
 
         {group.games && <p>{group.games}</p>}
 
