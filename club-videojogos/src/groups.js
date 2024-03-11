@@ -7,7 +7,7 @@ export async function getgroups(query) {
   let groups = await localforage.getItem("groups");
   if (!groups) groups = [];
   if (query) {
-    groups = matchSorter(groups, query, { keys: ["first", "last"] });
+    groups = matchSorter(groups, query, { keys: ["name"] });
   }
   return groups.sort(sortBy("last", "createdAt"));
 }
