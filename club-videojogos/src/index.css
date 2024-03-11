@@ -439,7 +439,3 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
-
-.checkbox {
-  padding-left: 10px;
-}

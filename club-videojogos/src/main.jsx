@@ -6,8 +6,10 @@ import {
 } from "react-router-dom";
 import './index.css'
 import Root, { 
-  loader as rootLoader, 
-  action as rootAction, 
+  loaderGroup as rootLoaderGroup, 
+  actionGroup as rootActionGroup, 
+  loaderGame as rootLoaderGame, 
+  actionGame as rootActionGame, 
 } from "./routes/root";
 import ErrorPage from "./error-page";
 import Group, {
@@ -32,13 +34,14 @@ import {
 } from "./routes/game-destroy";
 import Index from "./routes/index";
 
+const isChecked = localStorage.getItem('isChecked') || false;
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
     errorElement: <ErrorPage />,
-    loader: rootLoader,
-    action: rootAction,
+    loader: ({ isChecked }) => (isChecked ? rootLoaderGame : rootLoaderGroup),
+    action: ({ isChecked }) => (isChecked ? rootActionGame : rootActionGroup),
     children: [
       {
         errorElement: <ErrorPage />,
@@ -98,6 +101,6 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <RouterProvider router={router} isChecked={isChecked}/>
   </React.StrictMode>,
 )
