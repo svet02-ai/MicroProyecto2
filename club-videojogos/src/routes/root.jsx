@@ -56,11 +56,11 @@ export default function Root() {
         document.getElementById("q").value = q;
         }, [q]);
     
-    const submit = useSubmit((data) => {
-      if (data.action === "create") {
-        return isChecked ? actionGame() : actionGroup();
+    const submit = useSubmit(() => {
+      if (isChecked) {
+        return actionGame();
       } else {
-        return data;
+        return actionGroup();
       }
     });
     
@@ -112,7 +112,7 @@ export default function Root() {
                 aria-live="polite"
               ></div>
             </Form>
-            <Form method="post" action="create">
+            <Form method="post" action={isChecked ? 'games': 'groups'}>
               <button type="submit">New</button>
             </Form>
           </div>
@@ -120,9 +120,9 @@ export default function Root() {
               {groups.length ? (
                   <ul>
                   {groups.map((group) => (
-                      <li key={group.id}>
+                      <li key={isChecked ? game.id: group.id}>
                           <NavLink
-                          to={`${isChecked ? 'games': 'groups'}/${group.id}`}
+                          to={`${isChecked ? 'games': 'groups'}/${isChecked ? game.id: group.id}`}
                           className={({ isActive, isPending }) =>
                           isActive
                               ? "active"
@@ -131,15 +131,15 @@ export default function Root() {
                               : ""
                           }
                           >
-                          <Link to={`${isChecked ? 'games': 'groups'}/${group.id}`}>
-                              {group.name ? (
+                          <Link to={`${isChecked ? 'games': 'groups'}/${isChecked ? game.id: group.id}`}>
+                              {isChecked ? game.name: group.name ? (
                               <>
-                                  {group.name} 
+                                  {isChecked ? game.name: group.name} 
                               </>
                               ) : (
                               <i>No Name</i>
                               )}{" "}
-                              {group.favorite && <span>★</span>}
+                              {isChecked ? game.name && <span>★</span>: group.name && <span>★</span>}
                           </Link>
                       </NavLink>
                       </li>
