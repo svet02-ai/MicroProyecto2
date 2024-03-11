@@ -40,8 +40,10 @@ const router = createBrowserRouter([
       path: "/",
       element: <Root />,
       errorElement: <ErrorPage />,
-      loader: ({ isChecked }) => (isChecked ? rootLoaderGame : rootLoaderGroup),
-      action: ({ isChecked }) => (isChecked ? rootActionGame : rootActionGroup),
+      // loader: ({ isChecked }) => (isChecked ? rootLoaderGame : rootLoaderGroup),
+      // action: ({ isChecked }) => (isChecked ? rootActionGame : rootActionGroup),
+      loader: rootLoaderGroup,
+      action: rootActionGroup,
       children: [
         {
           errorElement: <ErrorPage />,

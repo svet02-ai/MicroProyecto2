@@ -22,11 +22,11 @@ import {
 } from "react";
 
 export async function loaderGroup({ request }) {
-    const url = new URL(request.url);
-    const q = url.searchParams.get("q");
-    
-    const groups = await getgroups(q);
-    return { groups, q };
+  const url = new URL(request.url);
+  const q = url.searchParams.get("q");
+  
+  const groups = await getgroups(q);
+  return { groups, q };
 }
 
 export async function actionGroup() {
