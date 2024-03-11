@@ -53,12 +53,12 @@ const router = createBrowserRouter([
               loader: groupLoader,
               action: groupAction,
             },
-            {
-              path: "game/:gameId",
-              element: <Game />,
-              loader: gameLoader,
-              action: gameAction,
-            },
+            // {
+            //   path: "game/:gameId",
+            //   element: <Game />,
+            //   loader: gameLoader,
+            //   action: gameAction,
+            // },
           ],
         },
       ],
@@ -80,23 +80,23 @@ const router = createBrowserRouter([
       action: destroyAction,
       errorElement: <div>Oops! There was an error.</div>,
     },
-    {
-      path: "game/:gameId",
-      element: <Game />,
-      loader: gameLoader,
-      action: gameAction,
-    },
-    {
-      path: "game/:gameId/game-edit",
-      element: <Editgame />,
-      loader: gameLoader,
-      action: editGameAction,
-    },
-    {
-      path: "game/:gameId/game-destroy",
-      action: destroyGameAction,
-      errorElement: <div>Oops! There was an error.</div>,
-  },
+  //   {
+  //     path: "game/:gameId",
+  //     element: <Game />,
+  //     loader: gameLoader,
+  //     action: gameAction,
+  //   },
+  //   {
+  //     path: "game/:gameId/game-edit",
+  //     element: <Editgame />,
+  //     loader: gameLoader,
+  //     action: editGameAction,
+  //   },
+  //   {
+  //     path: "game/:gameId/game-destroy",
+  //     action: destroyGameAction,
+  //     errorElement: <div>Oops! There was an error.</div>,
+  // },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

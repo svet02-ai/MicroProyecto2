@@ -50,6 +50,7 @@ export async function actionGame() {
 export default function Root() {
     const {fetchedData = {} } = useLoaderData(); 
     const groups = fetchedData.groups || []; 
+    const games = fetchedData.games || []; 
     const q = fetchedData.q || "";
     const navigation = useNavigation();
         useEffect(() => {
@@ -74,6 +75,8 @@ export default function Root() {
     const handleToggle = (event) => {
       setIsChecked(event.target.checked);
     };
+
+    let tag = isChecked ? "game": "group"
 
     return (
       <>
@@ -117,7 +120,7 @@ export default function Root() {
             </Form>
           </div>
             <nav>
-              {groups.length ? (
+              {(isChecked ? games.lenght: groups.lenght) ? (
                   <ul>
                   {groups.map((group) => (
                       <li key={isChecked ? game.id: group.id}>
