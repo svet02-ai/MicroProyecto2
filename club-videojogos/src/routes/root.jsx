@@ -76,7 +76,7 @@ export default function Root() {
       setIsChecked(event.target.checked);
     };
 
-    let tag = isChecked ? "game": "group"
+    let flag = isChecked ? "games": "groups"
 
     return (
       <>
@@ -122,10 +122,10 @@ export default function Root() {
             <nav>
               {(isChecked ? games.lenght: groups.lenght) ? (
                   <ul>
-                  {groups.map((group) => (
-                      <li key={isChecked ? game.id: group.id}>
+                  {flag.map((tag) => (
+                      <li key={tag.id}>
                           <NavLink
-                          to={`${isChecked ? 'games': 'groups'}/${isChecked ? game.id: group.id}`}
+                          to={`${isChecked ? 'games': 'groups'}/${tag.id}`}
                           className={({ isActive, isPending }) =>
                           isActive
                               ? "active"
@@ -134,15 +134,15 @@ export default function Root() {
                               : ""
                           }
                           >
-                          <Link to={`${isChecked ? 'games': 'groups'}/${isChecked ? game.id: group.id}`}>
-                              {isChecked ? game.name: group.name ? (
+                          <Link to={`${isChecked ? 'games': 'groups'}/${tag.id}`}>
+                              {tag.name ? (
                               <>
-                                  {isChecked ? game.name: group.name} 
+                                  {tag.name} 
                               </>
                               ) : (
                               <i>No Name</i>
                               )}{" "}
-                              {isChecked ? game.name && <span>★</span>: group.name && <span>★</span>}
+                              {tag.name && <span>★</span>}
                           </Link>
                       </NavLink>
                       </li>
