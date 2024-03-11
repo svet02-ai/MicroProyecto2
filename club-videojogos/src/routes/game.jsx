@@ -4,54 +4,54 @@ import {
     useFetcher,
 } from "react-router-dom";
 import { 
-    getgroup, 
-    updategroup 
-} from "../groups";
+    getgame, 
+    updategame 
+} from "../games";
 
 export async function action({ request, params }) {
     let formData = await request.formData();
-    return updategroup(params.groupId, {
+    return updategame(params.gameId, {
       favorite: formData.get("favorite") === "true",
     });
 }
 
 export async function loader({ params }) {
-    const group = await getgroup(params.groupId);
-    if (!group) {
+    const game = await getgame(params.gameId);
+    if (!game) {
     throw new Response("", {
       status: 404,
       statusText: "Not Found",
     });
   }
-  return { group };
+  return { game };
 }
 
-export default function group() {
-    const { group } = useLoaderData();
+export default function game() {
+    const { game } = useLoaderData();
   return (
-    <div id="group">
+    <div id="game">
       <div>
         <img
-          key={group.avatar}
-          src={group.avatar || null}
+          key={game.avatar}
+          src={game.avatar || null}
         />
       </div>
 
       <div>
         <h1>
-          {group.name ? (
+          {game.name ? (
             <>
-              {group.name}
+              {game.name}
             </>
           ) : (
             <i>No Name</i>
           )}{" "}
-          <Favorite group={group} />
+          <Favorite game={game} />
         </h1>
 
-        {group.description && <p>{group.description}</p>}
+        {game.genre && <p>{game.genre}</p>}
 
-        {group.games && <p>{group.games}</p>}
+        {game.description && <p>{game.description}</p>}
 
         <div>
           <Form action="edit">
@@ -63,7 +63,7 @@ export default function group() {
             onSubmit={(event) => {
               if (
                 !confirm(
-                  "Please confirm you want to delete this group."
+                  "Please confirm you want to delete this game."
                 )
               ) {
                 event.preventDefault();
@@ -78,9 +78,9 @@ export default function group() {
   );
 }
 
-function Favorite({ group }) {
+function Favorite({ game }) {
     const fetcher = useFetcher();
-  let favorite = group.favorite;
+  let favorite = game.favorite;
   if (fetcher.formData) {
     favorite = fetcher.formData.get("favorite") === "true";
   }

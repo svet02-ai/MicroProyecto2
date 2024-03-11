@@ -4,40 +4,49 @@ import {
     redirect,
     useNavigate,
 } from "react-router-dom";
-import { updategroup } from "../groups";
+import { updategame } from "../games";
 
 export async function action({ request, params }) {
     const formData = await request.formData();
     const name = formData.get("name");
     const updates = Object.fromEntries(formData);
     updates.name;
-    await updategroup(params.groupId, updates);
-    return redirect(`/groups/${params.groupId}`);
+    await updategame(params.gameId, updates);
+    return redirect(`/games/${params.gameId}`);
 }
 
-export default function Editgroup() {
-  const { group } = useLoaderData();
+export default function Editgame() {
+  const { game } = useLoaderData();
   const navigate = useNavigate();
 
   return (
-    <Form method="post" id="group-form">
+    <Form method="post" id="game-form">
       <p>
         <span>Name</span>
         <input
-          placeholder="Name of the group"
+          placeholder="Name of the game"
           aria-label="Name"
           type="text"
           name="name"
-          defaultValue={group.name}
+          defaultValue={game.name}
         />
       </p>
+      <label>
+        <span>Genre</span>
+        <input
+          type="text"
+          name="genre"
+          placeholder="This is the genre of the game"
+          defaultValue={game.genre}
+        />
+      </label>
       <label>
         <span>Description</span>
         <input
           type="text"
           name="description"
-          placeholder="This is the description of the group"
-          defaultValue={group.description}
+          placeholder="This is the description of the game"
+          defaultValue={game.description}
         />
       </label>
       <label>
@@ -47,16 +56,7 @@ export default function Editgroup() {
           aria-label="Avatar URL"
           type="text"
           name="avatar"
-          defaultValue={group.avatar}
-        />
-      </label>
-      <label>
-        <span>Games</span>
-        <textarea
-          placeholder=""
-          name="games"
-          defaultValue={group.games}
-          rows={1}
+          defaultValue={game.avatar}
         />
       </label>
       <p>

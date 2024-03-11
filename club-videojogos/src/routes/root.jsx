@@ -13,6 +13,10 @@ import {
     creategroup 
 } from "../groups";
 import { 
+  getgames, 
+  creategame 
+} from "../games";
+import { 
     useEffect 
 } from "react";
 
@@ -22,7 +26,7 @@ export async function loader({ request }) {
     
     const groups = await getgroups(q);
     return { groups, q };
-  }
+}
 
 export async function action() {
   const group = await creategroup();
@@ -46,7 +50,13 @@ export default function Root() {
     return (
       <>
         <div id="sidebar">
-          <h1>Game Groups</h1>
+          <h1 style={{ display: "flex", justifyContent: "space-between" }}>Game/Groups
+            <label class="switch">
+              <input type="checkbox"></input>
+              <span class="slider round"></span>
+            </label>
+          </h1>
+            
           <div>
             <Form id="search-form" role="search">
               <input

@@ -5,7 +5,10 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import './index.css'
-import Root, { loader as rootLoader, action as rootAction, } from "./routes/root";
+import Root, { 
+  loader as rootLoader, 
+  action as rootAction, 
+} from "./routes/root";
 import ErrorPage from "./error-page";
 import Group, {
   loader as groupLoader,
@@ -17,6 +20,16 @@ import Editgroup, {
 import { 
   action as destroyAction 
 } from "./routes/destroy";
+import Game, {
+  loader as gameLoader,
+  action as gameAction,
+} from "./routes/game";
+import Editgame, {
+  action as editGameAction,
+} from "./routes/game-edit";
+import { 
+  action as destroyGameAction 
+} from "./routes/game-destroy";
 import Index from "./routes/index";
 
 const router = createBrowserRouter([
@@ -37,7 +50,12 @@ const router = createBrowserRouter([
             loader: groupLoader,
             action: groupAction,
           },
-          /* the rest of the routes */
+          {
+            path: "game/:gameId",
+            element: <Game />,
+            loader: gameLoader,
+            action: gameAction,
+          },
         ],
       },
     ],
@@ -57,6 +75,23 @@ const router = createBrowserRouter([
   {
     path: "groups/:groupId/destroy",
     action: destroyAction,
+    errorElement: <div>Oops! There was an error.</div>,
+  },
+  {
+    path: "game/:gameId",
+    element: <Game />,
+    loader: gameLoader,
+    action: gameAction,
+  },
+  {
+    path: "game/:gameId/game-edit",
+    element: <Editgame />,
+    loader: gameLoader,
+    action: editGameAction,
+  },
+  {
+    path: "game/:gameId/game-destroy",
+    action: destroyGameAction,
     errorElement: <div>Oops! There was an error.</div>,
   },
 ]);
