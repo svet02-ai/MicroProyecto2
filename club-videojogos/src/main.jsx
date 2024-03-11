@@ -18,6 +18,8 @@ import {
   action as destroyAction 
 } from "./routes/destroy";
 import Index from "./routes/index";
+import Login from './routes/login';
+import Signin from './routes/signin';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +45,14 @@ const router = createBrowserRouter([
     ],
   },
   {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signin",
+    element: <Signin />,
+  },
+  {
     path: "groups/:groupId",
     element: <Group />,
     loader: groupLoader,
@@ -59,6 +69,7 @@ const router = createBrowserRouter([
     action: destroyAction,
     errorElement: <div>Oops! There was an error.</div>,
   },
+
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
