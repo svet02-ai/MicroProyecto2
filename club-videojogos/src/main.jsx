@@ -33,55 +33,66 @@ import {
   action as destroyGameAction 
 } from "./routes/game-destroy";
 import Index from "./routes/index";
+import Login from './routes/login';
+import Signin from './routes/signin';
 
 const isChecked = localStorage.getItem('isChecked') || false;
 const router = createBrowserRouter([
   {
-      path: "/",
-      element: <Root />,
-      errorElement: <ErrorPage />,
-      // loader: ({ isChecked }) => (isChecked ? rootLoaderGame : rootLoaderGroup),
-      // action: ({ isChecked }) => (isChecked ? rootActionGame : rootActionGroup),
-      loader: rootLoaderGroup,
-      action: rootActionGroup,
-      children: [
-        {
-          errorElement: <ErrorPage />,
-          children: [
-            { index: true, element: <Index /> },
-            {
-              path: "groups/:groupId",
-              element: <Group />,
-              loader: groupLoader,
-              action: groupAction,
-            },
-            // {
-            //   path: "game/:gameId",
-            //   element: <Game />,
-            //   loader: gameLoader,
-            //   action: gameAction,
-            // },
-          ],
-        },
-      ],
-    },
-    {
-      path: "groups/:groupId",
-      element: <Group />,
-      loader: groupLoader,
-      action: groupAction,
-    },
-    {
-      path: "groups/:groupId/edit",
-      element: <Editgroup />,
-      loader: groupLoader,
-      action: editAction,
-    },
-    {
-      path: "groups/:groupId/destroy",
-      action: destroyAction,
-      errorElement: <div>Oops! There was an error.</div>,
-    },
+
+    path: "/",
+    element: <Root />,
+    errorElement: <ErrorPage />,
+    // loader: ({ isChecked }) => (isChecked ? rootLoaderGame : rootLoaderGroup),
+    // action: ({ isChecked }) => (isChecked ? rootActionGame : rootActionGroup),
+    loader: rootLoaderGroup,
+    action: rootActionGroup,
+    children: [
+      {
+        errorElement: <ErrorPage />,
+        children: [
+          { index: true, element: <Index /> },
+          {
+            path: "groups/:groupId",
+            element: <Group />,
+            loader: groupLoader,
+            action: groupAction,
+          },
+        // {
+        //   path: "game/:gameId",
+        //   element: <Game />,
+        //   loader: gameLoader,
+        //   action: gameAction,
+        // },
+        ],
+      },
+    ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signin",
+    element: <Signin />,
+  },
+  {
+    path: "groups/:groupId",
+    element: <Group />,
+    loader: groupLoader,
+    action: groupAction,
+  },
+  {
+    path: "groups/:groupId/edit",
+    element: <Editgroup />,
+    loader: groupLoader,
+    action: editAction,
+  },
+  {
+    path: "groups/:groupId/destroy",
+    action: destroyAction,
+    errorElement: <div>Oops! There was an error.</div>,
+  },
   //   {
   //     path: "game/:gameId",
   //     element: <Game />,
